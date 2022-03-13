@@ -1,8 +1,8 @@
 import { useBrushProvider } from './provider/BrushProvider';
-import { useMouseProvider } from './provider/MouseProvider';
+import { useInputProvider } from './provider/InputProvider';
 
 const EtchFeedback = () => {
-  const { isDown, mouseX, mouseY, canvasX, canvasY } = useMouseProvider();
+  const { isDown, inputX, inputY, canvasX, canvasY } = useInputProvider();
   const { brushX, brushY, oldBrushX, oldBrushY, brushRadius } =
     useBrushProvider();
   return (
@@ -17,7 +17,7 @@ const EtchFeedback = () => {
               <p>
                 <span className='font-bold'>Mouse:</span>
                 <span className='ml-2'>
-                  isDown: {'' + isDown}, x: {mouseX}, y: {mouseY}
+                  isDown: {'' + isDown}, x: {inputX}, y: {inputY}
                 </span>
               </p>
               <p>

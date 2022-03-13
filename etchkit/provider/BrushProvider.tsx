@@ -1,7 +1,7 @@
 import { createContext, lazy, useContext, useEffect, useState } from 'react';
 import useAnimationFrame from '../hook/AnimationFrame';
 import { useCanvasProvider } from './CanvasProvider';
-import { useMouseProvider } from './MouseProvider';
+import { useInputProvider } from './InputProvider';
 import { LazyBrush } from 'lazy-brush';
 
 interface BrushContextProps {
@@ -10,6 +10,7 @@ interface BrushContextProps {
   oldBrushX: number;
   oldBrushY: number;
   brushRadius: number;
+  lazyBrushThreshold: number;
 }
 
 const BrushContext = createContext<BrushContextProps>(null);
@@ -17,8 +18,9 @@ const BrushContext = createContext<BrushContextProps>(null);
 const BrushProvider = ({ children }) => {
   const [brushX, setBrushX] = useState(0);
   const [brushY, setBrushY] = useState(0);
+  const [lazyBrushThreshold, setLazyBrushThreshold] = useState(15);
   const [brushRadius, setBrushRadius] = useState(10);
-  const { canvasX, canvasY } = useMouseProvider();
+  const { canvasX, canvasY } = useInputProvider();
   const [oldBrushX, setOldBrushX] = useState(0);
   const [oldBrushY, setOldBrushY] = useState(0);
   useEffect(() => {
@@ -27,8 +29,8 @@ const BrushProvider = ({ children }) => {
   }, []);
   useAnimationFrame(() => {
     if (
-      Math.abs(canvasX - oldBrushX) < brushRadius &&
-      Math.abs(canvasY - oldBrushY) < brushRadius
+      Math.abs(canvasX - oldBrushX) < lazyBrushThreshold &&
+      Math.abs(canvasY - oldBrushY) < lazyBrushThreshold
     ) {
       return;
     }
@@ -38,7 +40,7 @@ const BrushProvider = ({ children }) => {
     const dist =
       Math.sqrt(
         Math.pow(canvasX - oldBrushX, 2) + Math.pow(canvasY - oldBrushY, 2)
-      ) - brushRadius;
+      ) - lazyBrushThreshold;
     const newBrushX = oldBrushX + dist * Math.cos(angle);
     const newBrushY = oldBrushY + dist * Math.sin(angle);
     setBrushX(newBrushX);
@@ -51,7 +53,8 @@ const BrushProvider = ({ children }) => {
         brushY,
         oldBrushX,
         oldBrushY,
-        brushRadius
+        brushRadius,
+        lazyBrushThreshold
       }}
     >
       {children}
