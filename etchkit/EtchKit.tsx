@@ -3,7 +3,7 @@ import EtchFeedback from './EtchFeedback';
 import EtchRenderer from './EtchRenderer';
 import BrushProvider from './provider/BrushProvider';
 import CanvasProvider from './provider/CanvasProvider';
-import MouseProvider from './provider/MouseProvider';
+import InputProvider from './provider/InputProvider';
 
 export interface EtchKitParams {
   width?: number;
@@ -14,14 +14,14 @@ export interface EtchKitParams {
 const EtchKit = ({ width, height, feedback }: EtchKitParams) => {
   return (
     <CanvasProvider>
-      <MouseProvider>
+      <InputProvider>
         <BrushProvider>
           {feedback && <EtchFeedback />}
           <EtchCanvas>
             <EtchRenderer />
           </EtchCanvas>
         </BrushProvider>
-      </MouseProvider>
+      </InputProvider>
     </CanvasProvider>
   );
 };
