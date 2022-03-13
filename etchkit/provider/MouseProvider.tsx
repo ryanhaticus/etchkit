@@ -9,13 +9,7 @@ interface MouseContextProps {
   canvasY: number;
 }
 
-const MouseContext = createContext<MouseContextProps>({
-  mouseX: 0,
-  mouseY: 0,
-  isDown: false,
-  canvasX: 0,
-  canvasY: 0
-});
+const MouseContext = createContext<MouseContextProps>(null);
 
 const MouseProvider = ({ children }) => {
   const [mouseX, setMouseX] = useState(0);
