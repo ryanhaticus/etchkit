@@ -2,7 +2,6 @@ import { createContext, lazy, useContext, useEffect, useState } from 'react';
 import useAnimationFrame from '../hook/AnimationFrame';
 import { useCanvasProvider } from './CanvasProvider';
 import { useInputProvider } from './InputProvider';
-import { LazyBrush } from 'lazy-brush';
 
 interface BrushContextProps {
   brushX: number;
