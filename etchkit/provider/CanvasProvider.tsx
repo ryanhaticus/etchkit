@@ -3,7 +3,6 @@ import {
   Dispatch,
   useContext,
   useEffect,
-  useRef,
   useState
 } from 'react';
 

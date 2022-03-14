@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import useAnimationFrame from './hook/AnimationFrame';
 import { useBrushProvider } from './provider/BrushProvider';
 import { useCanvasProvider } from './provider/CanvasProvider';

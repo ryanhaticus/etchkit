@@ -1,6 +1,5 @@
-import { createContext, lazy, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import useAnimationFrame from '../hook/AnimationFrame';
-import { useCanvasProvider } from './CanvasProvider';
 import { useInputProvider } from './InputProvider';
 
 interface BrushContextProps {
