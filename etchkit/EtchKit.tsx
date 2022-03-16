@@ -1,9 +1,10 @@
 import EtchCanvas from './EtchCanvas';
 import EtchFeedback from './EtchFeedback';
 import EtchRenderer from './EtchRenderer';
-import BrushProvider from './provider/BrushProvider';
-import CanvasProvider from './provider/CanvasProvider';
-import InputProvider from './provider/InputProvider';
+import BrushProvider from './providers/BrushProvider';
+import CanvasProvider from './providers/CanvasProvider';
+import ElementProvider from './providers/ElementProvider';
+import InputProvider from './providers/InputProvider';
 
 export interface EtchKitParams {
   width?: number;
@@ -15,12 +16,14 @@ const EtchKit = ({ width, height, feedback }: EtchKitParams) => {
   return (
     <CanvasProvider>
       <InputProvider>
-        <BrushProvider>
-          {feedback && <EtchFeedback />}
-          <EtchCanvas>
-            <EtchRenderer />
-          </EtchCanvas>
-        </BrushProvider>
+        <ElementProvider>
+          <BrushProvider>
+            {feedback && <EtchFeedback />}
+            <EtchCanvas>
+              <EtchRenderer />
+            </EtchCanvas>
+          </BrushProvider>
+        </ElementProvider>
       </InputProvider>
     </CanvasProvider>
   );

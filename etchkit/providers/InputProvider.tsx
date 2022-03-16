@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useCanvasProvider } from './CanvasProvider';
 
-interface InputContextProps {
+export interface InputContextProps {
   inputX: number;
   inputY: number;
   isDown: boolean;

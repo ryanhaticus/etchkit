@@ -1,3 +1,4 @@
+import { BrushType } from "../types/BrushType";
 import EtchPoint from "./EtchPoint";
 
 interface EtchElementParams {
@@ -5,7 +6,7 @@ interface EtchElementParams {
   selected: boolean;
 }
 
-export default class EtchElement {
+export default abstract class EtchElement {
   private position: EtchPoint;
   private selected: boolean;
   constructor({ position }: EtchElementParams) {
@@ -15,10 +16,15 @@ export default class EtchElement {
   public getPosition() {
     return this.position;
   }
-  public setSelected(selected: boolean): void {
-    this.selected = selected;
-  }
   public isSelected(): boolean {
     return this.selected;
   }
+  public select(): void {
+    this.selected = true;
+  }
+  public deselect(): void {
+    this.selected = false;
+  }
+  public abstract getBrushType(): BrushType;
+  public abstract render(context: CanvasRenderingContext2D): void;
 }

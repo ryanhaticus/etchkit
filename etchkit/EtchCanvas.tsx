@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useCanvasProvider } from './provider/CanvasProvider';
+import { useCanvasProvider } from './providers/CanvasProvider';
 
 export interface EtchCanvasParams {
   width?: number;

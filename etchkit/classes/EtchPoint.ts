@@ -17,6 +17,10 @@ export default class EtchPoint {
   public setY(y: number): void {
     this.y = y;
   }
+  public setXY(point: EtchPoint) {
+    this.x = point.getX();
+    this.y = point.getY();
+  }
   public static calculateDistance(point1: EtchPoint, point2: EtchPoint): number {
     const dx = point1.getX() - point2.getX();
     const dy = point1.getY() - point2.getY();
