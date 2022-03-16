@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 const EtchKit = dynamic(() => import('../etchkit/EtchKit'), { ssr: false });
 
 const Index = () => {
-  return <EtchKit width={500} height={500} feedback={true} />;
+  return <EtchKit feedback={true} />;
 };
 
 export default Index;

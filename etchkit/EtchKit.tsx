@@ -19,7 +19,7 @@ const EtchKit = ({ width, height, feedback }: EtchKitParams) => {
         <ElementProvider>
           <BrushProvider>
             {feedback && <EtchFeedback />}
-            <EtchCanvas>
+            <EtchCanvas width={width} height={height}>
               <EtchRenderer />
             </EtchCanvas>
           </BrushProvider>
