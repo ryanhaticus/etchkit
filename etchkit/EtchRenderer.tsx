@@ -4,7 +4,7 @@ import { useBrushProvider } from './providers/BrushProvider';
 import { useCanvasProvider } from './providers/CanvasProvider';
 import { useInputProvider } from './providers/InputProvider';
 import { useElementProvider } from './providers/ElementProvider';
-import { BrushType } from './types/BrushType';
+import { ElementType } from './types/ElementType';
 import { LazyPathElement } from './classes/elements/LazyPathElement';
 
 const EtchRenderer = () => {
@@ -62,8 +62,8 @@ const EtchRenderer = () => {
       if (!element) {
         continue;
       }
-      switch (element.getBrushType()) {
-        case BrushType.Lazy:
+      switch (element.getElementType()) {
+        case ElementType.LazyPath:
           (element as LazyPathElement).render(drawingContext);
           break;
       }

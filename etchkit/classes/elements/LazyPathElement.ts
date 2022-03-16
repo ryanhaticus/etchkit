@@ -1,4 +1,4 @@
-import { BrushType } from '../../types/BrushType';
+import { ElementType } from '../../types/ElementType';
 import EtchElement from '../EtchElement';
 import EtchPoint from '../EtchPoint';
 
@@ -16,8 +16,8 @@ export class LazyPathElement extends EtchElement {
   public getRadius() {
     return this.radius;
   }
-  public getBrushType(): BrushType {
-    return BrushType.Lazy;
+  public getElementType(): ElementType {
+    return ElementType.LazyPath;
   }
   public render(context: CanvasRenderingContext2D) {
     context.lineWidth = this.getRadius() * 2;

@@ -1,4 +1,4 @@
-import { BrushType } from "../types/BrushType";
+import { ElementType } from "../types/ElementType";
 import EtchPoint from "./EtchPoint";
 
 interface EtchElementParams {
@@ -25,6 +25,6 @@ export default abstract class EtchElement {
   public deselect(): void {
     this.selected = false;
   }
-  public abstract getBrushType(): BrushType;
+  public abstract getElementType(): ElementType;
   public abstract render(context: CanvasRenderingContext2D): void;
 }

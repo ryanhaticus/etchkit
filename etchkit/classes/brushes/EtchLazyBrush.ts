@@ -1,4 +1,4 @@
-import { BrushType } from "../../types/BrushType";
+import { ElementType } from "../../types/ElementType";
 import EtchBrush from "../EtchBrush";
 import EtchPoint from "../EtchPoint";
 import { LazyPathElement } from "../elements/LazyPathElement";
@@ -45,7 +45,7 @@ export default class LazyBrush extends EtchBrush {
       this.setXY(new EtchPoint(newBrushX, newBrushY));
     }
     if (isDown) {
-      if (temporaryElement && temporaryElement.getBrushType() == BrushType.Lazy) {
+      if (temporaryElement && temporaryElement.getElementType() == ElementType.LazyPath) {
         temporaryElement.getPoints().push(new EtchPoint(this.lazyPosition.getX(), this.lazyPosition.getY()));
       }
       if (!temporaryElement) {
