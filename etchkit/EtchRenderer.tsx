@@ -54,10 +54,6 @@ const EtchRenderer = () => {
       drawingContext.canvas.height
     );
 
-    drawingContext.strokeStyle = '#000';
-    drawingContext.lineWidth = 1;
-    drawingContext.setLineDash([]);
-
     for (const element of [temporaryElement, ...elements]) {
       if (!element) {
         continue;
@@ -66,6 +62,9 @@ const EtchRenderer = () => {
         case ElementType.LazyPath:
           (element as LazyPathElement).render(drawingContext);
           break;
+      }
+      if (element.isSelected()) {
+        element.trace(drawingContext);
       }
     }
   };

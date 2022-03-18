@@ -1,14 +1,19 @@
-import { ElementType } from '../../types/ElementType';
+import ElementType from '../../types/ElementType';
 import EtchElement from '../EtchElement';
 import EtchPoint from '../EtchPoint';
+import EtchContextColor from '../EtchContextColor';
+import EtchColor from '../../types/EtchColor';
 
 export class LazyPathElement extends EtchElement {
   private points: EtchPoint[];
   private radius: number;
-  constructor(points: EtchPoint[], radius: number) {
+  private color: EtchContextColor;
+  constructor(points: EtchPoint[], radius: number, color: EtchContextColor) {
     super({ position: points[0], selected: false });
     this.points = points;
     this.radius = radius;
+    this.color = color;
+    this.select();
   }
   public getPoints(): EtchPoint[] {
     return this.points;
@@ -19,16 +24,21 @@ export class LazyPathElement extends EtchElement {
   public getElementType(): ElementType {
     return ElementType.LazyPath;
   }
+  public getColor(): EtchContextColor {
+    return this.color;
+  }
   public render(context: CanvasRenderingContext2D) {
     context.lineWidth = this.getRadius() * 2;
+    context.strokeStyle = this.getColor().getContextColor();
     context.lineCap = 'round';
-    context.strokeStyle = '#000';
     for (let i = 0; i < this.points.length - 1; i++) {
       context.beginPath();
       context.moveTo(this.points[i].getX(), this.points[i].getY());
       context.lineTo(this.points[i + 1].getX(), this.points[i + 1].getY());
       context.stroke();
     }
+  }
+  public trace(context: CanvasRenderingContext2D): void {
     let maxX = this.points[0].getX();
     let maxY = this.points[0].getY();
     let minX = this.points[0].getX();
@@ -47,16 +57,7 @@ export class LazyPathElement extends EtchElement {
         minY = point.getY();
       }
     }
-    context.beginPath();
-    context.lineWidth = 2;
-    context.strokeStyle = 'rgba(0,0,0,0.2)';
-    context.setLineDash([5, 5]);
-    context.moveTo(minX, minY);
-    context.lineTo(maxX, minY);
-    context.lineTo(maxX, maxY);
-    context.lineTo(minX, maxY);
-    context.lineTo(minX, minY);
-    context.stroke();
+    this._trace(new EtchPoint(minX, minY), new EtchPoint(maxX, maxY), context);
   }
 }
 

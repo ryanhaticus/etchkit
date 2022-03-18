@@ -2,6 +2,8 @@ import { ElementType } from "../../types/ElementType";
 import EtchBrush from "../EtchBrush";
 import EtchPoint from "../EtchPoint";
 import { LazyPathElement } from "../elements/LazyPathElement";
+import EtchColor from "../../types/EtchColor";
+import EtchContextColor from "../EtchContextColor";
 
 export default class LazyBrush extends EtchBrush {
   private lazyRadius: number;
@@ -49,7 +51,7 @@ export default class LazyBrush extends EtchBrush {
         temporaryElement.getPoints().push(new EtchPoint(this.lazyPosition.getX(), this.lazyPosition.getY()));
       }
       if (!temporaryElement) {
-        setTemporaryElement(new LazyPathElement([new EtchPoint(this.lazyPosition.getX(), this.lazyPosition.getY())], this.getRadius()));
+        setTemporaryElement(new LazyPathElement([new EtchPoint(this.lazyPosition.getX(), this.lazyPosition.getY())], this.getRadius(), new EtchContextColor(EtchColor.Black)));
       }
     }
   }
