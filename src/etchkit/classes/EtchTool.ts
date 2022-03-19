@@ -1,4 +1,6 @@
 import { IEtchCanvasContextProps } from '../providers/EtchCanvasProvider';
+import { IEtchElementContextProps } from '../providers/EtchElementProvider';
+import { IEtchInputContextProps } from '../providers/EtchInputProvider';
 import { IEtchToolContextProps } from '../providers/EtchToolProvider';
 import { ToolType } from '../types/ToolType';
 
@@ -20,6 +22,8 @@ export abstract class EtchTool {
   }
   public abstract onAnimationFrame(
     canvasContext: IEtchCanvasContextProps,
-    toolContext: IEtchToolContextProps
+    toolContext: IEtchToolContextProps,
+    inputContext: IEtchInputContextProps,
+    elementContext: IEtchElementContextProps
   ): void;
 }

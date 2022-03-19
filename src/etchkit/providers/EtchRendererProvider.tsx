@@ -2,6 +2,7 @@ import React from 'react';
 import { useAnimationFrame } from '../hooks/AnimationFrame';
 import { useEtchCanvasProvider } from './EtchCanvasProvider';
 import { useEtchElementProvider } from './EtchElementProvider';
+import { useEtchInputProvider } from './EtchInputProvider';
 import { useEtchToolProvider } from './EtchToolProvider';
 
 export interface IEtchRendererProviderProps {}
@@ -12,8 +13,9 @@ export const EtchRendererProvider: React.FunctionComponent<
   const { children } = props;
 
   const canvasContext = useEtchCanvasProvider();
+  const inputContext = useEtchInputProvider();
   const toolContext = useEtchToolProvider();
-  const { elements } = useEtchElementProvider();
+  const elementContext = useEtchElementProvider();
 
   useAnimationFrame(() => {
     const { interfaceContext, drawingContext } = canvasContext;
@@ -36,8 +38,14 @@ export const EtchRendererProvider: React.FunctionComponent<
       interfaceContext.canvas.height
     );
 
-    activeTool.onAnimationFrame(canvasContext, toolContext);
+    activeTool.onAnimationFrame(
+      canvasContext,
+      toolContext,
+      inputContext,
+      elementContext
+    );
 
+    const { elements } = elementContext;
     const sortedElements = elements.sort((a, b) => b.getLayer() - a.getLayer());
 
     for (let element of sortedElements) {
