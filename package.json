@@ -1,27 +1,33 @@
 {
   "name": "etchkit",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "author": "Ryan Haticus",
+  "license": "MIT",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "lazy-brush": "^1.0.1",
-    "next": "12.1.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "build": "yarn clean && prettier --write src/ && yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module CommonJS --outDir dist/cjs",
+    "clean": "rimraf ./dist",
+    "dev": "cpx \"src/**/*.{ts,tsx}\" \"../etchkit-dev/etchkit/\" --watch"
   },
   "devDependencies": {
     "@types/node": "^17.0.21",
     "@types/react": "^17.0.40",
-    "autoprefixer": "^10.4.2",
-    "eslint": "8.10.0",
-    "eslint-config-next": "12.1.0",
-    "postcss": "^8.4.8",
-    "tailwindcss": "^3.0.23",
+    "@types/react-dom": "^17.0.13",
+    "cpx": "^1.5.0",
+    "prettier": "^2.6.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rimraf": "^3.0.2",
     "typescript": "^4.6.2"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }
