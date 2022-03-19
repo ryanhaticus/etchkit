@@ -11,16 +11,6 @@ export class EtchPoint {
   public getY(): number {
     return this.y;
   }
-  public setX(x: number): void {
-    this.x = x;
-  }
-  public setY(y: number): void {
-    this.y = y;
-  }
-  public set(point: EtchPoint): void {
-    this.x = point.getX();
-    this.y = point.getY();
-  }
   public static calculateDistance(
     point1: EtchPoint,
     point2: EtchPoint

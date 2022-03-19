@@ -1,12 +1,25 @@
+import { IEtchCanvasContextProps } from '../providers/EtchCanvasProvider';
+import { IEtchToolContextProps } from '../providers/EtchToolProvider';
 import { ToolType } from '../types/ToolType';
 
 export abstract class EtchTool {
   private toolType: ToolType;
-  constructor(toolType: ToolType) {
+  private strokeWidth: number;
+  constructor(toolType: ToolType, defaultStrokeWidth?: number) {
     this.toolType = toolType;
+    this.strokeWidth = defaultStrokeWidth || 10;
   }
   public getToolType(): ToolType {
     return this.toolType;
   }
-  public abstract onAnimationFrame(): void;
+  public getStrokeWidth() {
+    return this.strokeWidth;
+  }
+  public setStrokeWidth(defaultStrokeWidth: number) {
+    this.strokeWidth = defaultStrokeWidth;
+  }
+  public abstract onAnimationFrame(
+    canvasContext: IEtchCanvasContextProps,
+    toolContext: IEtchToolContextProps
+  ): void;
 }

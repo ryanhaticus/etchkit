@@ -2,13 +2,12 @@ import React from 'react';
 import { useEtchCanvasProvider } from '../providers/EtchCanvasProvider';
 import { useEtchInputProvider } from '../providers/EtchInputProvider';
 import { useEtchToolProvider } from '../providers/EtchToolProvider';
+import { ToolType } from '../types/ToolType';
 import { EtchVerboseDisplay } from './EtchVerboseDisplay';
 
 export interface IEtchVerboseProps {}
 
-export const EtchVerbose: React.FunctionComponent<IEtchVerboseProps> = (
-  props
-) => {
+export const EtchVerbose: React.FunctionComponent<IEtchVerboseProps> = () => {
   const { interfaceContext, drawingContext } = useEtchCanvasProvider();
   const { isMouseDown, mousePosition } = useEtchInputProvider();
   const { activeTool, toolPosition } = useEtchToolProvider();
@@ -21,6 +20,7 @@ export const EtchVerbose: React.FunctionComponent<IEtchVerboseProps> = (
         display: 'flex',
         justifyContent: 'end',
         flexDirection: 'column',
+        userSelect: 'none',
       }}
     >
       <EtchVerboseDisplay
@@ -38,7 +38,7 @@ export const EtchVerbose: React.FunctionComponent<IEtchVerboseProps> = (
       />
       <EtchVerboseDisplay
         name='activeTool'
-        value={activeTool.getToolType().toString()}
+        value={ToolType[activeTool.getToolType()]}
       />
       <EtchVerboseDisplay
         name='toolPosition'

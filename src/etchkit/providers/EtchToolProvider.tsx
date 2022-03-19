@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { EtchPoint } from '../classes/EtchPoint';
 import { EtchTool } from '../classes/EtchTool';
-import { EtchMoveTool } from '../tools/EtchMoveTool';
+import { EtchLineTool } from '../classes/tools/EtchLineTool';
+import { EtchMoveTool } from '../classes/tools/EtchMoveTool';
 import { useEtchCanvasProvider } from './EtchCanvasProvider';
 import { useEtchInputProvider } from './EtchInputProvider';
 
@@ -24,8 +25,8 @@ export const EtchToolProvider: React.FunctionComponent<
   const { mousePosition } = useEtchInputProvider();
   const { interfaceContext } = useEtchCanvasProvider();
 
-  const [activeTool] = useState(new EtchMoveTool());
-  const [toolPosition] = useState(new EtchPoint(0, 0));
+  const [activeTool] = useState(new EtchLineTool());
+  const [toolPosition, setToolPosition] = useState(new EtchPoint(0, 0));
 
   useEffect(() => {
     const target = interfaceContext?.canvas;
@@ -38,7 +39,7 @@ export const EtchToolProvider: React.FunctionComponent<
       Math.min(Math.max(x - target.offsetLeft, 0), target.width),
       Math.min(Math.max(y - target.offsetTop, 0), target.height)
     );
-    toolPosition.set(newToolPosition);
+    setToolPosition(newToolPosition);
   }, [mousePosition]);
 
   return (
