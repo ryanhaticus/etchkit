@@ -1,1 +1,1 @@
-export * from './EtchKit';
+export { EtchKit } from './EtchKit';

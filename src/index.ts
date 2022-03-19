@@ -1,1 +1,3 @@
-export * from './etchkit';
+import { EtchKit } from './etchkit';
+
+export default EtchKit;
