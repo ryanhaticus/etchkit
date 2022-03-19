@@ -45,11 +45,10 @@ export class EtchLineElement extends EtchElement {
       return;
     }
     drawingContext.lineWidth = this.getStrokeWidth() * 2;
-    drawingContext.strokeStyle = this.getColor().toHex();
+    drawingContext.strokeStyle = this.getColor().toRGBAString();
     drawingContext.beginPath();
     drawingContext.moveTo(this.point1.getX(), this.point1.getY());
     drawingContext.lineTo(this.point2.getX(), this.point2.getY());
     drawingContext.stroke();
-    console.log('draw');
   }
 }

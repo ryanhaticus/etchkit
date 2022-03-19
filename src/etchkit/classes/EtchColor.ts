@@ -26,6 +26,9 @@ export class EtchColor {
       16
     )}${this.a.toString(16)}`;
   }
+  public toRGBAString() {
+    return `rgba(${this.r}, ${this.g}, ${this.b}, ${this.a})`;
+  }
   public static fromHex(hex: string): EtchColor {
     const r = parseInt(hex.substring(1, 2), 16);
     const g = parseInt(hex.substring(3, 2), 16);
