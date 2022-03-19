@@ -11,7 +11,7 @@ export const EtchVerbose: React.FunctionComponent<IEtchVerboseProps> = (
 ) => {
   const { interfaceContext, drawingContext } = useEtchCanvasProvider();
   const { isMouseDown, mousePosition } = useEtchInputProvider();
-  const { toolPosition } = useEtchToolProvider();
+  const { activeTool, toolPosition } = useEtchToolProvider();
 
   return (
     <div
@@ -35,6 +35,10 @@ export const EtchVerbose: React.FunctionComponent<IEtchVerboseProps> = (
       <EtchVerboseDisplay
         name='mousePosition'
         value={`(${mousePosition.getX()}, ${mousePosition.getY()})`}
+      />
+      <EtchVerboseDisplay
+        name='activeTool'
+        value={activeTool.getToolType().toString()}
       />
       <EtchVerboseDisplay
         name='toolPosition'
