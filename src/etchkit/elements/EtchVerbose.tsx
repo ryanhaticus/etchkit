@@ -8,7 +8,7 @@ import { EtchVerboseDisplay } from './EtchVerboseDisplay';
 export interface IEtchVerboseProps {}
 
 export const EtchVerbose: React.FunctionComponent<IEtchVerboseProps> = () => {
-  const { interfaceContext, drawingContext } = useEtchCanvasProvider();
+  const { drawingContext } = useEtchCanvasProvider();
   const { isMouseDown, mousePosition } = useEtchInputProvider();
   const { activeTool, toolPosition } = useEtchToolProvider();
 
@@ -23,10 +23,6 @@ export const EtchVerbose: React.FunctionComponent<IEtchVerboseProps> = () => {
         userSelect: 'none',
       }}
     >
-      <EtchVerboseDisplay
-        name='interfaceContext'
-        value={interfaceContext ? 'exists' : 'does not exist'}
-      />
       <EtchVerboseDisplay
         name='drawingContext'
         value={drawingContext ? 'exists' : 'does not exist'}

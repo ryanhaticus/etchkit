@@ -33,10 +33,8 @@ export class EtchLineElement extends EtchElement {
           Math.min(this.point1.getX(), this.point2.getX()),
           Math.min(this.point1.getY(), this.point2.getY())
         ),
-        new EtchPoint(
-          Math.max(this.point1.getX(), this.point2.getX()),
-          Math.max(this.point1.getY(), this.point2.getY())
-        )
+        Math.abs(this.point1.getX() - this.point2.getX()),
+        Math.abs(this.point1.getY() - this.point2.getY())
       )
     );
   }

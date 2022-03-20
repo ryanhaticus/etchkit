@@ -1,7 +1,6 @@
 import React, { createContext, useContext } from 'react';
 import { EtchVerbose } from './elements/EtchVerbose';
 import { EtchProviderTrain } from './providers/EtchProviderTrain';
-
 export interface IEtchKitProps {
   api?: React.MutableRefObject<any>;
   width?: number;

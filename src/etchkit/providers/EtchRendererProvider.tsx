@@ -1,4 +1,6 @@
 import React from 'react';
+import { EtchRectangleElement } from '../classes/elements/EtchRectangleElement';
+import { EtchColor } from '../classes/EtchColor';
 import { useAnimationFrame } from '../hooks/AnimationFrame';
 import { useEtchCanvasProvider } from './EtchCanvasProvider';
 import { useEtchElementProvider } from './EtchElementProvider';
@@ -18,10 +20,10 @@ export const EtchRendererProvider: React.FunctionComponent<
   const elementContext = useEtchElementProvider();
 
   useAnimationFrame(() => {
-    const { interfaceContext, drawingContext } = canvasContext;
+    const { drawingContext } = canvasContext;
     const { activeTool } = toolContext;
 
-    if (!interfaceContext || !drawingContext || !activeTool) {
+    if (!drawingContext || !activeTool) {
       return;
     }
 
@@ -31,12 +33,6 @@ export const EtchRendererProvider: React.FunctionComponent<
       drawingContext.canvas.width,
       drawingContext.canvas.height
     );
-    interfaceContext.clearRect(
-      0,
-      0,
-      interfaceContext.canvas.width,
-      interfaceContext.canvas.height
-    );
 
     activeTool.onAnimationFrame(
       canvasContext,
@@ -44,12 +40,23 @@ export const EtchRendererProvider: React.FunctionComponent<
       inputContext,
       elementContext
     );
-
-    const { elements } = elementContext;
+    const { elements, selectedElements } = elementContext;
     const sortedElements = elements.sort((a, b) => b.getLayer() - a.getLayer());
 
-    for (let element of sortedElements) {
+    for (const element of sortedElements) {
       element.onAnimationFrame(canvasContext);
+    }
+
+    for (const element of selectedElements) {
+      const boundingBox = element.getBoundingBox();
+      const rectangle = new EtchRectangleElement(
+        boundingBox.getPoint(),
+        boundingBox.getWidth(),
+        boundingBox.getHeight()
+      );
+      rectangle.setStrokeWidth(1);
+      rectangle.setColor(new EtchColor(2, 132, 199, 0.5));
+      rectangle.onAnimationFrame({ drawingContext });
     }
   });
 

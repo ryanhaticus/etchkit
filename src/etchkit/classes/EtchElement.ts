@@ -6,7 +6,8 @@ import { EtchPoint } from './EtchPoint';
 export abstract class EtchElement {
   private boundingBox: EtchBoundingBox = new EtchBoundingBox(
     new EtchPoint(0, 0),
-    new EtchPoint(0, 0)
+    0,
+    0
   );
   private layer: number;
   private strokeWidth: number;
@@ -14,7 +15,7 @@ export abstract class EtchElement {
   constructor(layer: number, strokeWidth?: number, color?: EtchColor) {
     this.layer = layer;
     this.strokeWidth = strokeWidth || 10;
-    this.color = color || new EtchColor(0, 0, 0, 100);
+    this.color = color || new EtchColor(0, 0, 0, 1);
   }
   public getBoundingBox(): EtchBoundingBox {
     return this.boundingBox;

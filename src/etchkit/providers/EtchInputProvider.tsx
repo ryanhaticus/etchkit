@@ -22,7 +22,7 @@ export const EtchInputProvider: React.FunctionComponent<
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [mousePosition, setMousePosition] = useState(new EtchPoint(0, 0));
   const { bindControlsToWindow } = useEtchConfigurationProvider();
-  const { interfaceContext } = useEtchCanvasProvider();
+  const { drawingContext } = useEtchCanvasProvider();
 
   const handleMouseDown = () => {
     setIsMouseDown(true);
@@ -38,7 +38,7 @@ export const EtchInputProvider: React.FunctionComponent<
   };
 
   useEffect(() => {
-    const target = bindControlsToWindow ? window : interfaceContext?.canvas;
+    const target = bindControlsToWindow ? window : drawingContext?.canvas;
     if (!target) {
       return;
     }
@@ -56,7 +56,7 @@ export const EtchInputProvider: React.FunctionComponent<
       target.removeEventListener('touchend', handleMouseUp);
       target.removeEventListener('touchmove', handleMouseMove);
     };
-  }, [interfaceContext]);
+  }, [drawingContext]);
 
   return (
     <EtchInputContext.Provider value={{ isMouseDown, mousePosition }}>
