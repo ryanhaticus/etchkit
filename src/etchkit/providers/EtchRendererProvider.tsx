@@ -56,7 +56,9 @@ export const EtchRendererProvider: React.FunctionComponent<
       );
       rectangle.setStrokeWidth(1);
       rectangle.setColor(new EtchColor(2, 132, 199, 0.5));
+      drawingContext.globalCompositeOperation = 'xor';
       rectangle.onAnimationFrame({ drawingContext });
+      drawingContext.globalCompositeOperation = 'source-over';
     }
   });
 
