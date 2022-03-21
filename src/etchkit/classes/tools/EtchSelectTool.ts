@@ -50,9 +50,7 @@ export class EtchSelectTool extends EtchTool {
     );
     selectionRectangle.setStrokeWidth(this.getStrokeWidth());
     selectionRectangle.setColor(new EtchColor(2, 132, 199, 0.5));
-    drawingContext.setLineDash([8, 8]);
     selectionRectangle.onAnimationFrame({ drawingContext });
-    drawingContext.setLineDash([]);
 
     for (const element of elements) {
       const elementBoundingBox = element.getBoundingBox();

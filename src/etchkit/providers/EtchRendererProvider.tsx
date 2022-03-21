@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { EtchRectangleElement } from '../classes/elements/EtchRectangleElement';
 import { EtchColor } from '../classes/EtchColor';
 import { useAnimationFrame } from '../hooks/AnimationFrame';
@@ -18,6 +18,8 @@ export const EtchRendererProvider: React.FunctionComponent<
   const inputContext = useEtchInputProvider();
   const toolContext = useEtchToolProvider();
   const elementContext = useEtchElementProvider();
+
+  const [zoom, setZoom] = useState(0.5);
 
   useAnimationFrame(() => {
     const { drawingContext } = canvasContext;
@@ -56,9 +58,9 @@ export const EtchRendererProvider: React.FunctionComponent<
       );
       rectangle.setStrokeWidth(1);
       rectangle.setColor(new EtchColor(2, 132, 199, 0.5));
-      drawingContext.globalCompositeOperation = 'xor';
+      drawingContext.setLineDash([8, 8]);
       rectangle.onAnimationFrame({ drawingContext });
-      drawingContext.globalCompositeOperation = 'source-over';
+      drawingContext.setLineDash([]);
     }
   });
 
